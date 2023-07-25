@@ -59,7 +59,7 @@ async def check_the_project_is_closed(
     charity_project = await charity_project_crud.get_charity_project_by_id(
         project_id, session
     )
-    if charity_project.fully_invested == True:
+    if charity_project.close_date is not None:
         raise HTTPException(
             status_code=400, detail="Закрытый проект нельзя редактировать!"
         )

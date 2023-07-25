@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import not_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.charity_project import CharityProject
@@ -14,7 +14,7 @@ async def invested_new_donation(
 
     open_projects = await session.execute(
         select(CharityProject)
-        .where(CharityProject.fully_invested == False)
+        .where(not_(Donation.fully_invested))
         .order_by(CharityProject.create_date)
     )
     open_projects = open_projects.scalars().all()
