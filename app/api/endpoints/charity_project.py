@@ -67,20 +67,12 @@ async def partially_update_charity_project(
     """Только для суперюзеров."""
     """Обработка запроса на изменение проекта."""
 
-    charity_project = (
-        await check_charity_project_exists(
-            project_id, session
-        )
-    )
+    charity_project = await check_charity_project_exists(project_id, session)
     await check_the_project_is_closed(project_id, session)
     if obj_in.full_amount:
-        await check_full_amount_befor_edit_project(
-            project_id, obj_in, session
-        )
+        await check_full_amount_befor_edit_project(project_id, obj_in, session)
     if obj_in.name:
-        await check_name_duplicate(
-            obj_in.name, session
-        )
+        await check_name_duplicate(obj_in.name, session)
     charity_project = await charity_project_crud.update(
         charity_project, obj_in, session
     )
@@ -99,13 +91,7 @@ async def remove_charity_project(
     """Только для суперюзеров."""
     """Обработка запроса на удаление проекта."""
 
-    charity_project = (
-        await check_charity_project_exists(
-            project_id, session
-        )
-    )
-    await check_invested_amount(
-        project_id, session
-    )
+    charity_project = await check_charity_project_exists(project_id, session)
+    await check_invested_amount(project_id, session)
     charity_project = await charity_project_crud.remove(charity_project, session)
     return charity_project

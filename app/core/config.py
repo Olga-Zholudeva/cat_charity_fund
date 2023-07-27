@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     app_description: str = (
         "Приложение для Благотворительного фонда поддержки котиков QRKot"
     )
-    database_url: str = "sqlite+aiosqlite:///./fastapi.db"
+    database_url: str = "sqlite+aiosqlite:///./cat_charity_fund.db"
     secret: str = "SECRET"
 
     class Config:
